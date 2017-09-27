@@ -1,7 +1,10 @@
+@import "partials/functions";
 @import "partials/variables";
-@import 'partials/mixins';
+@import "partials/mixins";
 
 
+@include google-font("Alegreya+Sans");
+@include google-font("Titillium+Web");
 
 
 @include fancy-links;
@@ -9,6 +12,11 @@
 body {
   font-family: sans-serif;
   color: $text-color;
+  font-size: em(18px);
+
+  @include large-screens {
+    font-size: 125%;
+  }
 }
 
 h1, h2, h3, h4 {
@@ -25,6 +33,9 @@ p {
 
 a {
   color: $link-color;
+  &:hover{
+    color: darken($link-color, 15%);
+  }
 }
 
 .warning-button { 
@@ -50,6 +61,14 @@ a {
     }
     a {
       color: $menu-item-color;
+      padding: 6px 8px;
+      border-bottom: 1px solid transparentize(#fefefe, 1);
+      transition: border-bottom 0.5s;
+      transition-timing-function: ease-in-out;
+
+      &:hover {
+        border-bottom: 1px solid opacify(#fefefe, 0.5);
+      }
     }
   }
   
@@ -60,17 +79,35 @@ a {
 
 #main {
   width: $content-width;
+  @include large-screens {
+    width: auto;
+    max-width: $content-width;
+  }
   margin-left: auto;
   margin-right: auto;
 
   #content {
+    float: left;
+    width: 6*$col;
   }
 
   #sidebar {
+    float: right;
+    width: 2*$col;
+
+    li {
+      list-style-type: none;
+      padding: em(16px) em(20px);
+      border-bottom: 1px dashed #999;
+      &:hover {
+        background-color: #efefef;
+      }
+    }
   }
 }
 
 #footer {
+  clear: both;
   height: $footer-height;
   background-color: $ternary-color;
 }
